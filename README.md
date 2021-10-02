@@ -2,6 +2,9 @@
 
 Public repository of Gaia marketplace (<https://ongaia.com>) smart contracts.
 
+![GitHub](https://img.shields.io/github/license/NFT-Genius/gaia-contracts)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/NFT-Genius/gaia-contracts?color=blue)
+
 ## Getting Started
 
 ### Create Account
