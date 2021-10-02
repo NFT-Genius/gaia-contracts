@@ -1,0 +1,133 @@
+image,name,description
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/bronzong-g-platinum-pl-41.jpg,Bronzong G,"Basic — SP
+
+Poké-POWER: Galactic Switch
+Once during your turn (before your attack), you may move an Energy card attached to 1 of your Pokémon SP to another of your Pokémon. Then, put 2 damage counters on Bronzong G. This power can’t be used if Bronzong G is affected by a Special Condition.
+
+[M][C][C] Psychic Pulse: 40
+Does 10 damage to each of your opponent’s Benched Pokémon that has any damage counters on it. (Don’t apply Weakness and Resistance for Benched Pokémon.)
+
+weakness: [P]×2
+resistance: [R]-20
+retreat: 3"
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-XY9-109-puzzle_of_time.jpg,Puzzle of Time,"You may play 2 Puzzle of Time cards at once.
+
+If you played 1 card, look at the top 3 cards of your deck and put them back in any order.
+If you played 2 cards, put 2 cards from your discard pile into your hand.
+You may play as many Item cards as you like during your turn (before your attack)."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/seaking-diamond-pearl-dp-62.jpg,Seaking,"80 HP — [W]
+Stage 1 — Evolves from Goldeen
+
+[C][C] Flail: 10×
+Does 10 damage times the number of damage counters on Seaking.
+
+[W][W] Horn Drill: 50
+
+weakness: [L]+20
+resistance:
+retreat: 1"
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/ultimate-zone-arceus-ar-91.jpg,Ultimate Zone,"This card stays in play when you play it. Discard this card if another Stadium card comes into play. If another card with the same name is in play, you can’t play this card.
+
+During each player’s turn, the player may move an Energy card attached to 1 of his or her Benched Pokémon to his or her Active Arceus as often as he or she likes."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-SV004-grookey.jpg,Grookey,"60 HP — [G]
+Basic
+
+[C] Fury Swipes: 10×
+Flip 3 coins. This attack does 10 damage for each heads.
+
+weakness: [R]×2
+resistance:
+retreat: 1"
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-001-yanma.jpg,Yanma,"80 HP — [G]
+Basic
+
+[G] Tackle: 10
+
+[G][C] Wing Attack: 30
+
+weakness: [R]×2
+resistance:
+retreat: 1
+
+If it flaps its wings really fast, it can generate shock waves that will shatter windows in the area."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-002-yanmega.jpg,Yanmega,"Stage 1 — Evolves from Yanma
+
+[G] Bug Bite: 30
+
+[G][C] Nosedive: 120
+This Pokémon also does 30 damage to itself.
+
+weakness: [R]×2
+resistance:
+retreat: 0
+
+Rare
+
+This six-legged Pokémon is easily capable of transporting an adult in flight. The wings on its tail help it stay balanced."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-003-celebi.jpg,Celebi,"70 HP — [G]
+Basic
+
+Ability: Woodland Stroll
+Once during your turn, if this Pokémon is in the Active Spot, you may look at the top 6 cards of your deck, reveal an Energy card you find there, and put it into your hand. Shuffle the other cards back into your deck.
+
+[G][C][C] Leaf Step: 40
+
+weakness: [R]×2
+resistance:
+retreat: 1
+
+Rare
+
+It has the power to travel across time, but it is said to appear only in peaceful times."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-017-reshiram.jpg,Reshiram,"Amazing Blaze: 270
+This Pokémon also does 60 damage to itself.
+
+weakness: [W]×2
+resistance:
+retreat: 3
+
+Amazing Rare
+
+When Reshiram’s tail flares, the heat energy moves the atmosphere and changes the world’s weather."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-018-cinderace_v.jpg,Cinderace,"210 HP — [R]
+Basic
+
+Ability: Field Runner
+If a Stadium is in play, this Pokémon has no Retreat Cost.
+
+[R][R][C] Crimson Legs: 140
+
+V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards.
+
+weakness: [W]×2
+resistance:
+retreat: 2"
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-020-horsea.jpg,Horsea,"Water Gun: 10
+
+weakness: [L]×2
+resistance:
+retreat: 0
+
+It makes its nest in the shade of corals. If it senses danger, it spits murky ink and flees."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/en_US-SF-021-kyogre.jpg,Kyogre,"W][L][M][C] Amazing Surge
+This attack does 80 damage to each of your opponent’s Pokémon. (Don’t apply Weakness and Resistance for Benched Pokémon.)
+
+weakness: [L]×2
+resistance:
+retreat: 3
+
+Amazing Rare
+
+It is said to have widened the seas by causing downpours. It had been asleep in a marine trench."
+ipfs://QmdxycfVS5McFV6s8HHodf5jVnsgBerpqTHdPJeSfTdTNa/Seed/pokemon/kadabra-skyridge-sk-69.jpg,Kadabra,"Kadabra — 70 HP — [P]
+Stage 1 — Evolves from Abra
+
+[C] Nightmare: 10
+The Defending Pokémon is now Asleep.
+
+[P][C][C] Mind Shock: 40
+Don’t apply Weakness and Resistance.
+
+weakness: [P]×2
+resistance:
+retreat: 1"

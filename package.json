@@ -1,0 +1,53 @@
+{
+  "name": "flow-contracts",
+  "version": "0.1.0",
+  "repository": "https://github.com/NFT-Genius/gaia-contracts.git",
+  "author": "Carlos Tosta <carlos@popstand.com>",
+  "license": "AGPL",
+  "private": true,
+  "main": "src/seed.js",
+  "scripts": {
+    "emulator": "flow emulator --http-port 8090 --persist",
+    "emulator:deploy": "flow project deploy -n emulator",
+    "emulator:update": "flow project deploy -n emulator --update",
+    "emulator:wallet": "env PK=c1083c9fa9e9cd92415809f2a2572bc41adf93d431109376c1335eacacb55d05 SERVICE_ADDR=f8d6e0586b0a20c7 fcl-wallet",
+    "testnet:deploy": "flow project deploy -n testnet",
+    "testnet:update": "flow project deploy -n testnet --update",
+    "seeds": "node -r esm ./src/seed.js",
+    "seeds:help": "node -r esm ./src/seed.js --help"
+  },
+  "dependencies": {
+    "@onflow/fcl": "^0.0.76",
+    "@onflow/sdk": "^0.0.54",
+    "@onflow/types": "^0.0.5",
+    "@onflow/util-encode-key": "^0.0.2",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
+    "dotenv": "^10.0.0",
+    "elliptic": "^6.5.4",
+    "esm": "^3.2.25",
+    "sha3": "^2.1.4",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@onflow/dev-wallet": "^0.0.10",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "esm": "^3.2.25",
+    "husky": "4.3.8",
+    "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1",
+    "prettier-eslint-cli": "^5.0.1"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "eslint --fix"
+    ],
+    "src/**/*.{js,jsx,css,scss,less}": [
+      "prettier --write"
+    ]
+  }
+}

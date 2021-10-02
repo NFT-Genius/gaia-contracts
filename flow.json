@@ -1,0 +1,59 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "FlowToken": {
+      "source": "./contracts/FlowToken.cdc"
+    },
+    "FungibleToken": {
+      "source": "./contracts/FungibleToken.cdc"
+    },
+    "NonFungibleToken": {
+      "source": "./contracts/NonFungibleToken.cdc"
+    },
+    "Profile": {
+      "source": "./contracts/Profile.cdc"
+    },
+    "FUSD": {
+      "source": "./contracts/FUSD.cdc"
+    },
+    "Gaia": {
+      "source": "./contracts/Gaia.cdc"
+    },
+    "GaiaMarket": "./contracts/GaiaMarket.cdc"
+  },
+  "networks": {
+    "emulator": {
+      "host": "127.0.0.1:3569",
+      "chain": "flow-emulator"
+    },
+    "mainnet": {
+      "host": "access.mainnet.nodes.onflow.org:9000",
+      "chain": "flow-mainnet"
+    },
+    "testnet": {
+      "host": "access.devnet.nodes.onflow.org:9000",
+      "chain": "flow-testnet"
+    }
+  },
+  "accounts": {},
+  "deployments": {
+    "emulator": {
+      "emulator-account": ["FUSD", "Profile", "NonFungibleToken", "Gaia", "GaiaMarket"]
+    },
+    "testnet": {
+      "nft-account": ["Gaia"],
+      "market-account": ["GaiaMarket"]
+    }
+  },
+  "devWallet": {
+    "accessNode": {
+      "endpoint": "http://localhost:8090"
+    },
+    "port": 8701
+  }
+}
