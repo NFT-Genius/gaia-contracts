@@ -11,7 +11,7 @@ pub contract Gaia: NonFungibleToken {
     pub event Withdraw(id: UInt64, from: Address?)
     pub event Deposit(id: UInt64, to: Address?)
     pub event TemplateCreated(id: UInt64, metadata: {String:String})
-    pub event SetCreated(setID: UInt64, name: String, description: String, website: String, image: String, creator: Address, marketFee: UFix64)
+    pub event SetCreated(setID: UInt64, name: String, description: String, website: String, imageURI: String, creator: Address, marketFee: UFix64)
     pub event SetAddedAllowedAccount(setID: UInt64, allowedAccount: Address)
     pub event SetRemovedAllowedAccount(setID: UInt64, allowedAccount: Address)
     pub event TemplateAddedToSet(setID: UInt64, templateID: UInt64)
@@ -119,6 +119,10 @@ pub contract Gaia: NonFungibleToken {
         // Accounts allowed to mint
         access(self) let allowedAccounts: [Address]
 
+        pub fun returnAllowedAccounts(): [Address] {
+            return self.allowedAccounts
+        }
+
         // Set marketplace fee
         pub let marketFee: UFix64
 
@@ -201,12 +205,12 @@ pub contract Gaia: NonFungibleToken {
         // Array of templates that are a part of this set.
         // When a template is added to the set, its ID gets appended here.
         // The ID does not get removed from this array when a templates is locked.
-        access(self) var templates: [UInt64]
+        pub var templates: [UInt64]
 
         // Map of template IDs that Indicates if a template in this Set can be minted.
         // When a templates is added to a Set, it is mapped to false (not locked).
         // When a templates is locked, this is set to true and cannot be changed.
-        access(self) var lockedTemplates: {UInt64: Bool}
+        pub var lockedTemplates: {UInt64: Bool}
 
         // Indicates if the Set is currently locked.
         // When a Set is created, it is unlocked 
@@ -223,9 +227,9 @@ pub contract Gaia: NonFungibleToken {
         // that have been minted for specific Templates in this Set.
         // When a NFT is minted, this value is stored in the NFT to
         // show its place in the Set, eg. 13 of 60.
-         access(self) var numberMintedPerTemplate: {UInt64: UInt64}
+        pub var numberMintedPerTemplate: {UInt64: UInt64}
 
-        init(name: String, description: String, website: String, image: String, creator: Address, marketFee: UFix64)
+        init(name: String, description: String, website: String, imageURI: String, creator: Address, marketFee: UFix64)
          {
             self.setID = Gaia.nextSetID
             self.templates = []
@@ -233,7 +237,7 @@ pub contract Gaia: NonFungibleToken {
             self.locked = false
             self.numberMintedPerTemplate = {}
             // Create a new SetData for this Set and store it in contract storage
-            Gaia.setDatas[self.setID] = SetData(name: name, description: description, website: website, image: image, creator: creator, marketFee: marketFee)
+            Gaia.setDatas[self.setID] = SetData(name: name, description: description, website: website, imageURI: imageURI, creator: creator, marketFee: marketFee)
         }
 
         // addTemplate adds a template to the set
@@ -449,9 +453,9 @@ pub contract Gaia: NonFungibleToken {
         //
         // Parameters: name: The name of the Set
         //
-        pub fun createSet(name: String, description: String, website: String, image: String, creator: Address, marketFee: UFix64) {
+        pub fun createSet(name: String, description: String, website: String, imageURI: String, creator: Address, marketFee: UFix64) {
             // Create the new Set
-            var newSet <- create Set(name: name, description: description, website: website, image: image, creator: creator, marketFee: marketFee)
+            var newSet <- create Set(name: name, description: description, website: website, imageURI: imageURI, creator: creator, marketFee: marketFee)
             // Store it in the sets mapping field
             Gaia.sets[newSet.setID] <-! newSet
         }
@@ -468,7 +472,7 @@ pub contract Gaia: NonFungibleToken {
         pub fun borrowSet(setID: UInt64, authorizedAccount: Address): &Set {
             pre {
                 Gaia.sets[setID] != nil: "Cannot borrow Set: The Set doesn't exist"
-                Gaia.setDatas[setID]!.allowedAccounts.contains(authorizedAccount): "Account not authorized"
+                Gaia.setDatas[setID]!.returnAllowedAccounts().contains(authorizedAccount): "Account not authorized"
             }
             
             // Get a reference to the Set and return it
