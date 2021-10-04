@@ -108,7 +108,7 @@ pub contract Gaia: NonFungibleToken {
         pub let description: String
 
         // Set cover image
-        pub let image: String
+        pub let imageURI: String
 
         // Set website url
         pub let website: String
@@ -117,16 +117,16 @@ pub contract Gaia: NonFungibleToken {
         pub let creator: Address
         
         // Accounts allowed to mint
-        pub let allowedAccounts: [Address]
+        access(self) let allowedAccounts: [Address]
 
         // Set marketplace fee
         pub let marketFee: UFix64
 
-        init(name: String, description: String, website: String, image: String, creator: Address, marketFee: UFix64) {
+        init(name: String, description: String, website: String, imageURI: String, creator: Address, marketFee: UFix64) {
             pre {
                 name.length > 0: "New set name cannot be empty"
                 description.length > 0: "New set description cannot be empty"
-                image.length > 0: "New set image cannot be empty"
+                imageURI.length > 0: "New set imageURI cannot be empty"
                 creator != nil: "Creator must not be nil"
                 marketFee >= 0.0 && marketFee <= 0.15: "Market fee must be a number between 0.00 and 0.15"
             }
@@ -135,14 +135,14 @@ pub contract Gaia: NonFungibleToken {
             self.name = name
             self.description = description
             self.website = website
-            self.image = image
+            self.imageURI = imageURI
             self.creator = creator
             self.allowedAccounts = [creator, Gaia.account.address]
             self.marketFee = marketFee
 
             // Increment the setID so that it isn't used again
             Gaia.nextSetID = Gaia.nextSetID + 1 as UInt64
-            emit SetCreated(setID: self.setID, name: name, description: description, website: website, image: image, creator: creator, marketFee: marketFee)
+            emit SetCreated(setID: self.setID, name: name, description: description, website: website, imageURI: imageURI, creator: creator, marketFee: marketFee)
         }
 
         pub fun addAllowedAccount(account: Address) {
@@ -201,12 +201,12 @@ pub contract Gaia: NonFungibleToken {
         // Array of templates that are a part of this set.
         // When a template is added to the set, its ID gets appended here.
         // The ID does not get removed from this array when a templates is locked.
-        pub var templates: [UInt64]
+        access(self) var templates: [UInt64]
 
         // Map of template IDs that Indicates if a template in this Set can be minted.
         // When a templates is added to a Set, it is mapped to false (not locked).
         // When a templates is locked, this is set to true and cannot be changed.
-        pub var lockedTemplates: {UInt64: Bool}
+        access(self) var lockedTemplates: {UInt64: Bool}
 
         // Indicates if the Set is currently locked.
         // When a Set is created, it is unlocked 
@@ -223,7 +223,7 @@ pub contract Gaia: NonFungibleToken {
         // that have been minted for specific Templates in this Set.
         // When a NFT is minted, this value is stored in the NFT to
         // show its place in the Set, eg. 13 of 60.
-        pub var numberMintedPerTemplate: {UInt64: UInt64}
+         access(self) var numberMintedPerTemplate: {UInt64: UInt64}
 
         init(name: String, description: String, website: String, image: String, creator: Address, marketFee: UFix64)
          {
@@ -434,6 +434,16 @@ pub contract Gaia: NonFungibleToken {
             return newID
         }
 
+         pub fun createTemplates(templates: [{String: String}], setID: UInt64, authorizedAccount: Address){
+             
+              var templateIDs: [UInt64] = []
+            for metadata in templates {
+                var ID = self.createTemplate(metadata: metadata)
+                templateIDs.append(ID)
+            }
+            self.borrowSet(setID: setID, authorizedAccount: authorizedAccount).addTemplates(templateIDs: templateIDs)
+        }
+
         // createSet creates a new Set resource and stores it
         // in the sets mapping in the contract
         //
@@ -481,7 +491,7 @@ pub contract Gaia: NonFungibleToken {
         pub fun batchDeposit(tokens: @NonFungibleToken.Collection)
         pub fun getIDs(): [UInt64]
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
-        pub fun borrowGaiaAsset(id: UInt64): &Gaia.NFT? {
+        pub fun borrowGaiaNFT(id: UInt64): &Gaia.NFT? {
             // If the result isn't nil, the id of the returned reference
             // should be the same as the argument to the function
             post {
@@ -579,12 +589,12 @@ pub contract Gaia: NonFungibleToken {
             return &self.ownedNFTs[id] as &NonFungibleToken.NFT
         }
 
-        // borrowGaiaAsset
+        // borrowGaiaNFT
         // Gets a reference to an NFT in the collection as a GaiaAsset,
         // exposing all of its fields (including the typeID).
         // This is safe as there are no functions that can be called on the GaiaAsset.
         //
-        pub fun borrowGaiaAsset(id: UInt64): &Gaia.NFT? {
+        pub fun borrowGaiaNFT(id: UInt64): &Gaia.NFT? {
             if self.ownedNFTs[id] != nil {
                 let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT
                 return ref as! &Gaia.NFT
@@ -664,7 +674,7 @@ pub contract Gaia: NonFungibleToken {
     
     pub fun getSetImage(setID: UInt64): String? {
         // Don't force a revert if the setID is invalid
-        return Gaia.setDatas[setID]?.image
+        return Gaia.setDatas[setID]?.imageURI
     } 
 
     pub fun getSetInfo(setID: UInt64): SetData? {
@@ -789,7 +799,7 @@ pub contract Gaia: NonFungibleToken {
             ?? panic("Couldn't get collection")
         // We trust Gaia.Collection.borowGaiaAsset to get the correct itemID
         // (it checks it before returning it).
-        return collection.borrowGaiaAsset(id: itemID)
+        return collection.borrowGaiaNFT(id: itemID)
     }
     
     // checkSetup
