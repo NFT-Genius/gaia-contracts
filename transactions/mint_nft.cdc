@@ -1,4 +1,4 @@
-import Gaia from 0xNFTContract
+import Gaia from "../contracts/Gaia.cdc"
 
 // This transaction is what an admin would use to mint a single new moment
 // and deposit it in a user's collection
@@ -20,7 +20,7 @@ transaction(setID: UInt64, templateID: UInt64, recipientAddr: Address) {
 
     execute {
         // Borrow a reference to the specified set
-        let setRef = self.adminRef.borrowSet(setID: setID, account: recipientAddr)
+        let setRef = self.adminRef.borrowSet(setID: setID, authorizedAccount: recipientAddr)
 
         // Mint a new NFT
         let nft <- setRef.mintNFT(templateID: templateID)
