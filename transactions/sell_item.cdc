@@ -3,6 +3,7 @@ import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import FlowToken from "../contracts/FlowToken.cdc"
 import Gaia from "../contracts/Gaia.cdc"
 import NFTStorefront from "../contracts/NFTStorefront.cdc"
+import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 
 transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
     let flowReceiver: Capability<&{FungibleToken.Receiver}>
@@ -14,8 +15,8 @@ transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
         // We need a provider capability, but one is not provided by default so we create one if needed.
         let GaiaCollectionProviderPrivatePath = /private/GaiaCollectionProviderForNFTStorefront
 
-        self.flowReceiver = acct.getCapability<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
-        assert(self.flowReceiver.borrow() != nil, message: "Missing or mis-typed FlowToken receiver")
+        self.flowReceiver = acct.getCapability<&{FungibleToken.Receiver}>(/public/dapperUtilityCoinReceiver)
+        assert(self.flowReceiver.borrow() != nil, message: "Missing or mis-typed DapperUtilityCoin receiver")
         
         if !acct.getCapability<&{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(GaiaCollectionProviderPrivatePath)!.check() {
             acct.link<&{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(GaiaCollectionProviderPrivatePath, target: Gaia.CollectionStoragePath)
