@@ -1,12 +1,11 @@
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
-import FlowToken from "../contracts/FlowToken.cdc"
+import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 import Gaia from "../contracts/Gaia.cdc"
 import NFTStorefront from "../contracts/NFTStorefront.cdc"
-import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 
 transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
-    let flowReceiver: Capability<&{FungibleToken.Receiver}>
+    let ducReceiver: Capability<&{FungibleToken.Receiver}>
     let GaiaProvider: Capability<&{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>
     let storefront: &NFTStorefront.Storefront
 
@@ -15,8 +14,8 @@ transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
         // We need a provider capability, but one is not provided by default so we create one if needed.
         let GaiaCollectionProviderPrivatePath = /private/GaiaCollectionProviderForNFTStorefront
 
-        self.flowReceiver = acct.getCapability<&{FungibleToken.Receiver}>(/public/dapperUtilityCoinReceiver)
-        assert(self.flowReceiver.borrow() != nil, message: "Missing or mis-typed DapperUtilityCoin receiver")
+        self.ducReceiver = acct.getCapability<&{FungibleToken.Receiver}>(/public/dapperUtilityCoinReceiver)
+        assert(self.ducReceiver.borrow() != nil, message: "Missing or mis-typed DapperUtilityCoin receiver")
         
         if !acct.getCapability<&{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(GaiaCollectionProviderPrivatePath)!.check() {
             acct.link<&{NonFungibleToken.Provider, NonFungibleToken.CollectionPublic}>(GaiaCollectionProviderPrivatePath, target: Gaia.CollectionStoragePath)
@@ -31,15 +30,16 @@ transaction(saleItemID: UInt64, saleItemPrice: UFix64) {
 
     execute {
         let saleCut = NFTStorefront.SaleCut(
-            receiver: self.flowReceiver,
+            receiver: self.ducReceiver,
             amount: saleItemPrice
         )
         self.storefront.createListing(
             nftProviderCapability: self.GaiaProvider,
             nftType: Type<@Gaia.NFT>(),
             nftID: saleItemID,
-            salePaymentVaultType: Type<@FlowToken.Vault>(),
+            salePaymentVaultType: Type<@DapperUtilityCoin.Vault>(),
             saleCuts: [saleCut]
         )
     }
 }
+ 
