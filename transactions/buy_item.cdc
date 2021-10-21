@@ -3,6 +3,7 @@ import NonFungibleToken from "../contracts/NonFungibleToken.cdc"
 import FlowToken from "../contracts/FlowToken.cdc"
 import Gaia from "../contracts/Gaia.cdc"
 import NFTStorefront from "../contracts/NFTStorefront.cdc"
+import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 
 transaction(listingResourceID: UInt64, storefrontAddress: Address) {
     let paymentVault: @FungibleToken.Vault
@@ -22,9 +23,9 @@ transaction(listingResourceID: UInt64, storefrontAddress: Address) {
                     ?? panic("No Offer with that ID in Storefront")
         let price = self.listing.getDetails().salePrice
 
-        let mainFlowVault = acct.borrow<&FlowToken.Vault>(from: /storage/flowTokenVault)
-            ?? panic("Cannot borrow FlowToken vault from acct storage")
-        self.paymentVault <- mainFlowVault.withdraw(amount: price)
+        let mainFlowVault = acct.borrow<&DapperUtilityCoin.Vault>(from: /storage/dapperUtilityCoinVault)
+            ?? panic("Cannot borrow Dapper Utility Coin vault from acct storage")
+        self.paymentVault <- mainFlowVault.withdraw(amount: price) as! @DapperUtilityCoin.Vault
 
         self.GaiaCollection = acct.borrow<&Gaia.Collection{NonFungibleToken.Receiver}>(
             from: Gaia.CollectionStoragePath
