@@ -11,7 +11,8 @@ import {
   MINTER_PRIVATE_KEY,
   MINTER_ACCOUNT_INDEX,
   FUSD_CONTRACT,
-  FUNGIBLE_TOKEN
+  FUNGIBLE_TOKEN,
+  DUC_CONTRACT
 } from '../config';
 
 const ec = new EC('p256');
@@ -25,7 +26,8 @@ class FlowService {
       .put('0xNFTContract', NFT_CONTRACT)
       .put('0xNFTMarket', NFT_MARKET_CONTRACT)
       .put('0xFUSDContract', FUSD_CONTRACT)
-      .put('0xFungibleToken', FUNGIBLE_TOKEN);
+      .put('0xFungibleToken', FUNGIBLE_TOKEN)
+      .put('0xDuc', DUC_CONTRACT);
   }
   async getAccount(addr) {
     const { account } = await fcl.send([fcl.getAccount(addr)]);

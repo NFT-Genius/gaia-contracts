@@ -1,6 +1,6 @@
 import NFTStorefront from "../contracts/NFTStorefront.cdc"
 import Profile from "../contracts/Profile.cdc"
-import FlowToken from "../contracts/FlowToken.cdc"
+import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 
 // This transaction installs the Storefront ressource in an account.
@@ -32,23 +32,25 @@ transaction {
               acct.link<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath, target: NFTStorefront.StorefrontStoragePath)
           }
 
-          if acct.borrow<&FlowToken.Vault>(from: /storage/flowTokenVault) == nil {
-            // Create a new flowToken Vault and put it in storage
-            acct.save(<-FlowToken.createEmptyVault(), to: /storage/flowTokenVault)
+          //if user doesn't alredy have a DUC Vault
+          if acct.borrow<&DapperUtilityCoin.Vault>(from: /storage/dapperUtilityCoinReceiver) == nil {
+            // Create a new DapperUtilityCoin Vault and put it in storage
+            acct.save(<-DapperUtilityCoin.createEmptyVault(), to: /storage/dapperUtilityCoinReceiver)
 
             // Create a public capability to the Vault that only exposes
             // the deposit function through the Receiver interface
             acct.link<&{FungibleToken.Receiver}>(
-                /public/flowTokenReceiver,
-                target: /storage/flowTokenVault
+                /public/dapperUtilityCoinReceiver,
+                target: /storage/dapperUtilityCoinReceiver
             )
 
             // Create a public capability to the Vault that only exposes
             // the balance field through the Balance interface
             acct.link<&{FungibleToken.Balance}>(
-                /public/flowTokenBalance,
-                target: /storage/flowTokenVault
+                /public/dapperUtilityCoinBalance,
+                target: /storage/dapperUtilityCoinReceiver
             )
         }
     }
 }
+ 

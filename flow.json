@@ -27,6 +27,12 @@
 				"testnet": "0x7e60df042a9c0868"
 			}
 		},
+		"DapperUtilityCoin":{
+			"source":"./contracts/DapperUtilityCoin.cdc",
+			"aliases": {
+				"testnet": "0x82ec283f88a62e65"
+			}
+		},
 		"Gaia": "./contracts/Gaia.cdc",
 		"Profile": "./contracts/Profile.cdc"
 	},
@@ -51,7 +57,7 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": ["NonFungibleToken", "Gaia", "Profile", "NFTStorefront"]
+			"emulator-account": ["NonFungibleToken", "Gaia", "Profile", "NFTStorefront", "DapperUtilityCoin"]
 		},
 		"testnet": {
             "gaia-testnet": [
