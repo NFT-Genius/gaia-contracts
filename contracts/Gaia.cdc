@@ -18,6 +18,7 @@ pub contract Gaia: NonFungibleToken {
     pub event TemplateLockedFromSet(setID: UInt64, templateID: UInt64, numNFTs: UInt64)
     pub event SetLocked(setID: UInt64)
     pub event Minted(assetID: UInt64, templateID: UInt64, setID: UInt64, mintNumber: UInt64)
+    pub event Destroyed(id: UInt64)
 
     // Named Paths
     //
@@ -605,6 +606,15 @@ pub contract Gaia: NonFungibleToken {
             } else {
                 return nil
             }
+        }
+
+        // destroyNFT
+        // Destroys an NFT in the collection
+        //
+        pub fun destroyNFT(id: UInt64) {
+            let token <- self.ownedNFTs.remove(key: id) ?? panic("missing NFT")
+            destroy token
+            emit Destroyed(id: id)
         }
 
         // destructor
