@@ -1,0 +1,57 @@
+{
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "emulator-account"
+		}
+	},
+	"contracts": {
+		"NonFungibleToken": {
+			"source": "./contracts/NonFungibleToken.cdc",
+			"aliases": {
+				"testnet": "0x631e88ae7f1d7c20"
+			}
+		},
+		"FungibleToken": {
+			"source": "./contracts/FungibleToken.cdc",
+			"aliases": {
+				"emulator": "ee82856bf20e2aa6",
+				"testnet": "0x9a0766d93b6608b7"
+			}
+		},
+		"NFTStorefront": "./contracts/NFTStorefront.cdc",
+		"FlowToken": {
+			"source": "./contracts/FlowToken.cdc",
+			"aliases": {
+				"emulator": "0ae53cb6e3f42a79",
+				"testnet": "0x7e60df042a9c0868"
+			}
+		},
+		"DapperUtilityCoin":{
+			"source":"./contracts/DapperUtilityCoin.cdc",
+			"aliases": {
+				"testnet": "0x82ec283f88a62e65"
+			}
+		},
+		"Gaia": "./contracts/Gaia.cdc",
+		"Profile": "./contracts/Profile.cdc"
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"accounts": {
+		"emulator-account": {
+			"address": "0xf8d6e0586b0a20c7",
+			"key": "1d043adb3034880932b2a0b8eda7451cf2e08a5b5b6c73aaed10d898a98f61f1"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"emulator-account": ["NonFungibleToken", "Gaia", "Profile", "NFTStorefront", "DapperUtilityCoin"]
+		}
+	}
+}
+
+ 
