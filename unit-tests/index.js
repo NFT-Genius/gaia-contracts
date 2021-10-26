@@ -2,6 +2,7 @@ const fcl = require("@onflow/fcl");
 const { ec: EC } = require("elliptic");
 const { SHA3 } = require("sha3");
 const t = require("@onflow/types");
+import { init, emulator } from "flow-js-testing";
 
 require("dotenv").config();
 
