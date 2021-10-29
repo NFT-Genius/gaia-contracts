@@ -1,23 +1,20 @@
 {
   "name": "unit-tests",
-  "version": "0.1.0",
-  "description": "Unit tests for Gaia marketplace storefront contracts and scripts",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "author": "Jawwad <jawwad@nftgenius.com>",
-  "license": "MIT",
-  "private": true,
   "scripts": {
-    "emulator": "flow emulator --http-port 8080 --persist --verbose",
-    "emulator:deploy": "flow project deploy -n emulator",
-    "emulator:update": "flow project deploy -n emulator --update",
-    "get:account": "flow accounts get"
+    "test": "jest"
   },
-  "dependencies": {
-    "@onflow/fcl": "^0.0.77",
-    "@onflow/sdk": "^0.0.55",
-    "@onflow/types": "^0.0.5",
-    "dotenv": "^10.0.0",
-    "elliptic": "^6.5.4",
-    "sha3": "^2.1.4"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-jest": "^27.3.1",
+    "flow-js-testing": "^0.1.15-alpha.4",
+    "jest": "^27.3.1",
+    "jest-environment-node": "^27.3.1"
   }
 }
