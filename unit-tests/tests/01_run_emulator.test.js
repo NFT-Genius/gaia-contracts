@@ -1,26 +1,18 @@
-import path from "path";
-import { emulator, init } from "flow-js-testing";
+import emulator from "../src/emulator";
 
-describe("test setup", () => {  
-  beforeEach(async () => {
-    const basePath = path.resolve(__dirname, "../contracts");
-    const port = 8080;
+describe("emulator - logging", () => {
+  it("shall format single info line properly", async () => {
+    const msg = "Hello, world";
 
-    await init(basePath, { port });
-    await emulator.start(port);
+    const output = emulator.parseDataBuffer(msg);
+    console.log({ output });
   });
 
-  afterEach(async () => {
-    await emulator.stop();
-  });
+  it("shall format logged message", ()=>{
+    const msg =`time="2021-10-29T18:06:56+05:00" level=info msg=" Starting gRPC server on port 3569" port=3569`
 
-  test("basic test", async () => {
-    // Turn on logging from begining
-    emulator.setLogging(true);
-    // some asserts and interactions
-    
-    // Turn off logging for later calls
-    emulator.setLogging(false);
-    // more asserts and interactions here
-  });
+    const output = emulator.parseDataBuffer(msg);
+    console.log({ output })
+    expect(output.level).toBe("info")
+  })
 });
