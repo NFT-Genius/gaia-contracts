@@ -23,7 +23,7 @@ describe("deploying all contracts", () => {
 
   test("NonFungibleToken contract deploy", async () => {
     const name = "NonFungibleToken";
-    await deployContractByName(name);
+    await deployContractByName({ name });
     const address = await getContractAddress(name);
     const serviceAccount = await getServiceAddress();
     expect(address).toBe(serviceAccount);
@@ -31,7 +31,7 @@ describe("deploying all contracts", () => {
 
   // test("Gaia contract deploy", async () => {
   //   const name = "Gaia";
-  //   await deployContractByName(name);
+  //   await deployContractByName({ name });
   //   const address = await getContractAddress(name);
   //   const serviceAccount = await getServiceAddress();
   //   expect(address).toBe(serviceAccount);
@@ -39,7 +39,7 @@ describe("deploying all contracts", () => {
 
   // test("Profile contract deploy", async () => {
   //   const name = "Profile";
-  //   await deployContractByName(name);
+  //   await deployContractByName({ name });
   //   const address = await getContractAddress(name);
   //   const serviceAccount = await getServiceAddress();
   //   expect(address).toBe(serviceAccount);
@@ -47,7 +47,7 @@ describe("deploying all contracts", () => {
 
   // test("NFTStorefront contract deploy", async () => {
   //   const name = "NFTStorefront";
-  //   await deployContractByName(name);
+  //   await deployContractByName({ name });
   //   const address = await getContractAddress(name);
   //   const serviceAccount = await getServiceAddress();
   //   expect(address).toBe(serviceAccount);
