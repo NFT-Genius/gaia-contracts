@@ -5,7 +5,7 @@ jest.setTimeout(10000);
 
 describe("unit-tests", ()=>{
   beforeEach(async () => {
-    const basePath = path.resolve(__dirname, "../"); 
+    const basePath = path.resolve(__dirname, "../../"); 
 		const port = 8080; 
 		const logging = false;    
     await init(basePath, { port });

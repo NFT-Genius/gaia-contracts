@@ -12,7 +12,7 @@ jest.setTimeout(10000);
 describe("deploying all contracts", () => {
   // Instantiate emulator and path to Contracts
   beforeEach(async () => {
-    const basePath = path.resolve(__dirname, "../");
+    const basePath = path.resolve(__dirname, "../../");
     const port = 8080;
     await init(basePath, { port });
     return emulator.start(port);
