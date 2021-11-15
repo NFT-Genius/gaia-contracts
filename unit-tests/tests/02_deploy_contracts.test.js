@@ -31,13 +31,19 @@ describe("deploying all contracts", () => {
     expect(address).toBe(serviceAccount);
   });
 
-  // test("Gaia contract deploy", async () => {
-  //   const name = "Gaia";
-  //   await deployContractByName(name);
-  //   const address = await getContractAddress(name);
-  //   const serviceAccount = await getServiceAddress();
-  //   expect(address).toBe(serviceAccount);
-  // });
+  test("Gaia contract deploy", async () => {
+    const serviceAccount = await getServiceAddress();
+    
+    //Deploy the "Import" Contract First 
+    await deployContractByName("NonFungibleToken");
+    const nftAddrMap = { NonFungibleToken: serviceAccount }
+
+    //Deploy Original Gaia Contract
+    const name = "Gaia";
+    await deployContractByName({name: name, addressMap: nftAddrMap});
+    const address = await getContractAddress(name);
+    expect(address).toBe(serviceAccount);
+  });
 
   test("Profile contract deploy", async () => {
     const name = "Profile";
