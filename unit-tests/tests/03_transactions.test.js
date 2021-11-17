@@ -35,12 +35,13 @@ describe("transactions test", () => {
     await deployContractByName("FungibleToken");
     const ftAddrMap = { FungibleToken: serviceAccount }
 
+    await deployContractByName({name: "Gaia", addressMap: nftAddrMap});
     await deployContractByName({name: "NFTStorefront", addressMap: nftAddrMap, ftAddrMap});
     await deployContractByName({name: "DapperUtilityCoin", addressMap: ftAddrMap});
 
     await shallPass(async () => {
-      const name = "setup_account";
-      return sendTransaction({ name });
+      await sendTransaction({ name: "setup_account" });
+      return sendTransaction({ name: "setup_gaia_collection" });      
     });
   });
 });
