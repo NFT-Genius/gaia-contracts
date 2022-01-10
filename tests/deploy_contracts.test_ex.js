@@ -71,4 +71,12 @@ describe('deploying all contracts', () => {
     const address = await getContractAddress(name);
     expect(address).toBe(serviceAccount);
   });
+
+  test("Dapper Utility Coin contract deploy", async () => {
+    const name = "DapperUtilityCoin";
+    await deployContractByName(name);
+    const address = await getContractAddress(name);
+    const serviceAccount = await getServiceAddress();
+    expect(address).toBe(serviceAccount);
+  });
 });

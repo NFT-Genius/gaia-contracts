@@ -17,13 +17,13 @@ describe('unit-tests', () => {
     return emulator.stop();
   });
 
-  test('shall format single info line properly', async () => {
+  test('Emulator Test format single info line properly', async () => {
     const msg = 'Hello, world!';
     const output = emulator.parseDataBuffer(msg);
     expect(output).toEqual({});
   });
 
-  test('shall format logged message', () => {
+  test('Emulator Test format logged message', () => {
     const msg = `time="2021-11-03T18:06:56+05:00" level=info msg=" Starting gRPC server on port 3569" port=3569`;
     const output = emulator.parseDataBuffer(msg);
     expect(output.level).toBe('info');
