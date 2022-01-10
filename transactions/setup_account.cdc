@@ -3,7 +3,7 @@ import Profile from "../contracts/Profile.cdc"
 import DapperUtilityCoin from "../contracts/DapperUtilityCoin.cdc"
 import FungibleToken from "../contracts/FungibleToken.cdc"
 import Gaia from "../contracts/Gaia.cdc"
-// This transaction installs the Storefront ressource in an account.
+// This transaction installs the Storefront resource in an account.
 transaction {
     let address: Address
     prepare(acct: AuthAccount) {
@@ -32,12 +32,6 @@ transaction {
             acct.save(<-storefront, to: NFTStorefront.StorefrontStoragePath)
             // create a public capability for the .Storefront
             acct.link<&NFTStorefront.Storefront{NFTStorefront.StorefrontPublic}>(NFTStorefront.StorefrontPublicPath, target: NFTStorefront.StorefrontStoragePath)
-        }
-        
-        if acct.borrow<&Gaia.Collection>(from: Gaia.CollectionStoragePath) == nil {
-            let collection <- Gaia.createEmptyCollection() as! @Gaia.Collection
-            acct.save(<-collection, to: Gaia.CollectionStoragePath)
-            acct.link<&{Gaia.CollectionPublic}>(Gaia.CollectionPublicPath, target: Gaia.CollectionStoragePath)
         }
     }
 }
