@@ -7,7 +7,7 @@ import NonFungibleToken from "./core/NonFungibleToken.cdc"
 //
 // Wraps the NFTStorefront.createListing, ensuring that fees (such as royalties) are paid out to the appropriate places
 //
-// Heavily inspired by https://github.com/rarible/flow-contracts/blob/main/contracts/RaribleOrder.cdc
+// Adapted from: https://github.com/rarible/flow-contracts/blob/main/contracts/RaribleOrder.cdc
 //
 pub contract GaiaOrder {
 
@@ -82,8 +82,7 @@ pub contract GaiaOrder {
         nftType: String,
         nftId: UInt64,
         vaultType: String,
-        price: UFix64, // sum of payment parts
-        offerPrice: UFix64, // base for calculate rates
+        price: UFix64,
         payments: [Payment]
     )
 
@@ -126,7 +125,6 @@ pub contract GaiaOrder {
         let payments: [Payment] = []
         let saleCuts: [NFTStorefront.SaleCut] = []
         var percentage = 1.0
-        var offerPrice = 0.0
 
         let addPayment = fun (type: String, address: Address, rate: UFix64) {
             assert(rate >= 0.0 && rate < 1.0, message: "Rate must be in range [0..1)")
@@ -137,9 +135,7 @@ pub contract GaiaOrder {
             payments.append(Payment(type:type, address:address, rate: rate, amount: amount))
             saleCuts.append(NFTStorefront.SaleCut(receiver: receiver, amount: amount))
 
-            offerPrice = offerPrice + amount
             percentage = percentage - rate
-            assert(rate >= 0.0 && rate < 1.0, message: "Sum of payouts must be in range [0..1)")
         }
 
         if GaiaFee.buyerFee > 0.0 {
@@ -174,7 +170,6 @@ pub contract GaiaOrder {
             nftId: nftId,
             vaultType: vaultType.identifier,
             price: price,
-            offerPrice: offerPrice,
             payments: payments
         )
 
