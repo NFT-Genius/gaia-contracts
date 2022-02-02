@@ -43,16 +43,16 @@
 	},
 	"accounts": {
 		"emulator-account": {
-			"address": "${MINTER_ADDRESS}",
-			"key": "${MINTER_PRIVATE_KEY}"
+			"address": "$MINTER_ADDRESS",
+			"key": "$MINTER_PRIVATE_KEY"
 		},
 		"storefront-testnet": {
-            "address": "${STOREFRONT_ADDRESS}",
-            "key": "${STOREFRONT_PRIVATE_KEY}"
+            "address": "$STOREFRONT_ADDRESS",
+            "key": "$STOREFRONT_PRIVATE_KEY"
         },
         "gaia-testnet": {
-            "address": "${MINTER_ADDRESS}",
-            "key": "${MINTER_PRIVATE_KEY}"
+            "address": "$MINTER_ADDRESS",
+            "key": "$MINTER_PRIVATE_KEY"
         }
 	},
 	"deployments": {

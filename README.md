@@ -64,6 +64,10 @@ yarn testnet:update
 
 > __NOTE:__ Updates only works for non-initialized parts of the contract.
 
+## Unit Tests
+
+> __Important:__ To make the unit tests work, you need to update values on the emulator-account section of flow.json, change the address and key to your correct values
+
 ## Contributing
 
 Pull request are welcome. For major changes, please open an issue first to discuss what you would like to change.
