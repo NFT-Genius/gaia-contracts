@@ -4,3 +4,5 @@ node_modules
 flowdb
 .env
 .env.*
+.DS_STORE
+./contracts/.DS_STORE
