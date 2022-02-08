@@ -3,12 +3,6 @@ import FungibleToken from "./core/FungibleToken.cdc"
 import NFTStorefront from "./core/NFTStorefront.cdc"
 import NonFungibleToken from "./core/NonFungibleToken.cdc"
 
-// GaiaOrder
-//
-// Wraps the NFTStorefront.createListing, ensuring that fees (such as royalties) are paid out to the appropriate places
-//
-// Adapted from: https://github.com/rarible/flow-contracts/blob/main/contracts/RaribleOrder.cdc
-//
 pub contract GaiaOrder {
 
     pub let BUYER_FEE: String
