@@ -1,9 +1,6 @@
-
 // Gaia Fees
 //
 // Simple fee manager
-//
-// Heavily inspired by https://github.com/rarible/flow-contracts/blob/main/contracts/RaribleFee.cdc
 //
 pub contract GaiaFee {
 
